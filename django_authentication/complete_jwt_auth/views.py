@@ -2,18 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken
 
 from .serializers import RegisterSerializer, LoginSerializer
+from .utils import get_tokens_for_user
 
 # Create your views here.
-def get_tokens_for_user(user):
-    refresh = RefreshToken.for_user(user)
-    return {
-        'refresh': str(refresh),
-        'access': str(refresh.access_token),
-    }
-
 class RegisterAPIView(APIView):
     permission_classes = [permissions.AllowAny]
 
