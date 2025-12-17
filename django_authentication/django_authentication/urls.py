@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('jwt_api_usage.urls')),
     path('api/auth/', include('complete_jwt_auth.urls')),
+    path('api/cookie/auth/', include('jwt_cookie_auth.urls')),
 ]

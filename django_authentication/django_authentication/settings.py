@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'complete_jwt_auth',
-    'rest_framework_simplejwt.token_blacklist',
+    'rest_framework_simplejwt.token_blacklist', # this is the model for outstanding and blacklisting refresh tokens
     'jwt_api_usage',
+    'jwt_cookie_auth',
 ]
 
 MIDDLEWARE = [
@@ -73,10 +74,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_authentication.wsgi.application'
 
+# Use when using JWT without cookies
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     )
+# }
+
+# Use when using JWT with cookies
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+        'jwt_cookie_auth.authentication.CookieJWTAuthentication',
+    ),
 }
 
 SIMPLE_JWT = {
