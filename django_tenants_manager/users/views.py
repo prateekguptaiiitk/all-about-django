@@ -1,6 +1,6 @@
+from allauth.account.models import EmailAddress
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from allauth.account.utils import send_email_confirmation
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
@@ -66,7 +66,7 @@ def profile_emailchange(request):
 
             # Then send confirmation email
             # send_email_confirmation() will be deprecated soon!
-            send_email_confirmation(request, request.user)
+            EmailAddress.objects.add_email(request, request.user, confirm=True)
 
             return redirect('profile-settings')
         else:
@@ -98,7 +98,9 @@ def profile_usernamechange(request):
 
 @login_required
 def profile_emailverify(request):
-    send_email_confirmation(request, request.user)
+    # send_email_confirmation(request, request.user)
+    EmailAddress.objects.add_email(request, request.user, confirm=True)
+
     return redirect('profile-settings')
 
 
