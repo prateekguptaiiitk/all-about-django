@@ -1,8 +1,9 @@
 {% load static %}
-<header class="flex items-center justify-between bg-gray-800 h-20 px-8 text-white sticky top-0 z-40">
+<header class="flex items-center justify-between bg-gray-800 h-20 px-8 text-white sticky top-0 z-40"
+{% if color %}style="background-color: {{ color }};"{% endif %}>
     <div>
         <a class="flex items-center gap-2" href="/">
-            <img class="h-6" src="{% static 'images/logo.svg' %}" alt="Logo"/>
+            <img class="h-6" src="{% if logo %}{{ logo.url }}{% else %}{% static 'images/logo.svg' %}{% endif %}" alt="Logo"/>
             <span class="text-lg font-bold">{% if request.tenant %}{{ request.tenant.name}}{% else %}Django Tenants{% endif %}</span>
         </a>
     </div>

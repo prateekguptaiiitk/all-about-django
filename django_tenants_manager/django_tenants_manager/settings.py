@@ -51,6 +51,7 @@ SHARED_APPS = [
     'home',
     'users',
     'django_browser_reload',
+    'colorfield',
 ]
 
 TENANT_APPS = [
