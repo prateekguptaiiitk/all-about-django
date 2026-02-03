@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+from examples.tenant_tutorial.tenant_tutorial.settings import PUBLIC_SCHEMA_URLCONF
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,7 +35,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 SHARED_APPS = [
-    'django_tenants_manager',
+    'django_tenants',
     'tenant_manager',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,7 +53,7 @@ SHARED_APPS = [
     'django_browser_reload',
 ]
 
-TENANTS_APPS = [
+TENANT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,7 +69,7 @@ TENANTS_APPS = [
 ]
 
 INSTALLED_APPS = SHARED_APPS + [
-    app for app in TENANTS_APPS if app not in SHARED_APPS
+    app for app in TENANT_APPS if app not in SHARED_APPS
 ]
 
 SITE_ID = 1
@@ -93,6 +95,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 ROOT_URLCONF = 'django_tenants_manager.urls'
+PUBLIC_SCHEMA_URLCONF = 'django_tenants_manager.urls_public'
 
 TEMPLATES = [
     {
